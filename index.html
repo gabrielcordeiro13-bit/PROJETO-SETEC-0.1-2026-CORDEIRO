@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LAB 04 — Falha às 18:47</title>
+  <meta name="description" content="Escape Room Digital: investigue o Laboratório 04 e restaure o sistema antes do modo de segurança.">
+  <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+  <div class="app">
+
+    <header class="topo">
+      <div class="topo-ident">
+        <span class="topo-sigla">LAB 04</span>
+        <span class="topo-sub">Falha às 18:47</span>
+      </div>
+      <div class="topo-status">
+        <span id="cronometro" class="cronometro" aria-label="Tempo restante">15:00</span>
+        <button id="btn-ajuda" class="btn btn-pequeno" type="button">Como jogar</button>
+        <button id="btn-reiniciar" class="btn btn-pequeno" type="button">Reiniciar</button>
+      </div>
+    </header>
+
+    <!-- TELA 1: MENU -->
+    <main id="tela-menu" class="tela ativa">
+      <section class="painel menu-painel">
+        <p class="etiqueta">Semana Tecnológica — demonstração interativa</p>
+        <h1>LAB 04 — Falha às 18:47</h1>
+        <p class="resumo">
+          18:47. A rotina de backup do Laboratório 04 travou no meio e o sistema
+          entrou em bloqueio. Os projetos da mostra estão presos no servidor local.
+          Você é o monitor do turno e ficou para desligar as máquinas.
+          A porta só libera pelo terminal principal.
+        </p>
+        <div class="menu-grid">
+          <div>
+            <h2>O que fazer</h2>
+            <ol class="lista">
+              <li>Investigue as 5 estações do laboratório.</li>
+              <li>Anote pistas e combine informações.</li>
+              <li>Libere o terminal principal antes do modo de segurança.</li>
+            </ol>
+          </div>
+          <div>
+            <h2>Como interagir</h2>
+            <ul class="lista">
+              <li>Clique em uma estação para inspecionar.</li>
+              <li>Itens encontrados vão para o inventário.</li>
+              <li>Códigos são digitados no próprio local.</li>
+            </ul>
+          </div>
+        </div>
+        <p class="detalhe">Tempo estimado: 10 a 15 minutos. Funciona sem internet. Sem áudio obrigatório.</p>
+        <div class="acoes">
+          <button id="btn-iniciar" class="btn btn-principal" type="button">Entrar no laboratório</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- TELA 2: JOGO -->
+    <main id="tela-jogo" class="tela">
+      <section class="barra-objetivo">
+        <span id="objetivo-atual">Objetivo: inspecione a bancada.</span>
+        <span id="progresso">0 / 5 liberado</span>
+      </section>
+
+      <section class="cenario" aria-label="Mapa do laboratório">
+        <button class="estacao" type="button" data-local="bancada">
+          <span class="estacao-nome">Bancada 01</span>
+          <span class="estacao-desc">Gaveta, bilhete, ferramentas</span>
+          <span class="estacao-estado" data-estado="bancada">não inspecionada</span>
+        </button>
+        <button class="estacao" type="button" data-local="auxiliar">
+          <span class="estacao-nome">Terminal auxiliar</span>
+          <span class="estacao-desc">Login de 4 dígitos</span>
+          <span class="estacao-estado" data-estado="auxiliar">bloqueado</span>
+        </button>
+        <button class="estacao" type="button" data-local="armario">
+          <span class="estacao-nome">Armário técnico</span>
+          <span class="estacao-desc">Porta com tranca simples</span>
+          <span class="estacao-estado" data-estado="armario">trancado</span>
+        </button>
+        <button class="estacao" type="button" data-local="painel">
+          <span class="estacao-nome">Painel de energia</span>
+          <span class="estacao-desc">Chaves e sequência</span>
+          <span class="estacao-estado" data-estado="painel">desligado</span>
+        </button>
+        <button class="estacao" type="button" data-local="principal">
+          <span class="estacao-nome">Terminal principal</span>
+          <span class="estacao-desc">Restaura o sistema</span>
+          <span class="estacao-estado" data-estado="principal">bloqueado</span>
+        </button>
+      </section>
+
+      <div class="colunas">
+        <section class="painel" aria-label="Registro">
+          <h2>Registro</h2>
+          <div id="log" class="log" aria-live="polite"></div>
+        </section>
+        <aside class="painel" aria-label="Inventário e pistas">
+          <h2>Inventário</h2>
+          <div id="inventario" class="inventario">
+            <span class="vazio">Nenhum item. Clique nas estações para investigar.</span>
+          </div>
+          <h2>Pistas</h2>
+          <ul id="pistas" class="pistas">
+            <li class="vazio">Nenhuma pista anotada ainda.</li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+
+    <!-- TELA 3: FIM -->
+    <main id="tela-fim" class="tela">
+      <section class="painel fim-painel">
+        <p class="etiqueta" id="fim-etiqueta">Relatório do turno</p>
+        <h1 id="fim-titulo">Sistema restaurado</h1>
+        <p id="fim-texto" class="resumo"></p>
+        <dl class="resultado">
+          <div><dt>Tempo restante</dt><dd id="res-tempo">--:--</dd></div>
+          <div><dt>Erros</dt><dd id="res-erros">0</dd></div>
+          <div><dt>Pistas anotadas</dt><dd id="res-pistas">0</dd></div>
+          <div><dt>Dicas usadas</dt><dd id="res-dicas">0</dd></div>
+        </dl>
+        <div class="acoes">
+          <button id="btn-jogar-novamente" class="btn btn-principal" type="button">Jogar novamente</button>
+          <button id="btn-voltar-menu" class="btn" type="button">Voltar ao início</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- MODAL GENÉRICO: usado pelas Etapas 3 a 5 para detalhes, códigos e itens -->
+    <div id="modal-fundo" class="modal-fundo" hidden>
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+        <h2 id="modal-titulo">Inspeção</h2>
+        <div id="modal-conteudo" class="modal-conteudo"></div>
+        <div class="acoes">
+          <button id="btn-fechar-modal" class="btn" type="button">Fechar</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="rodape">
+      <span>Projeto escolar — HTML + CSS + JS puro, sem internet.</span>
+      <span id="versao">Etapa 2 — estrutura base</span>
+    </footer>
+  </div>
+
+  <!-- Script clássico (sem type="module") para funcionar com duplo clique em file:// -->
+  <script src="src/js/main.js"></script>
+</body>
+</html>
